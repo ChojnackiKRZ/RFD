@@ -1,0 +1,63 @@
+@author: Krzysztof Chojnacki
+
+
+<!doctype html>
+<title>Dodawanie nazwy powodu niewykonania</title>
+<table border="1">
+<form action='/add_submit' method="POST">
+<input type="reset" value="reset">
+<table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Linia</th>
+            <th>Data</th>
+            <th>Zmiana</th>
+            <th>KTM</th>
+            <th>OPIS</th>
+            <th>FORMA</th>
+            <th>ILE PLAN</th>
+            <th>ILE REALIZACJA</th>
+            <th>BRAK</th>
+            <th>POWOD NIEWYKONANIA</th>
+        </tr>
+    </thead>
+        <tbody>
+  {% for j, i in slownik.items() %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.linia}}</td>
+            <td>{{i.data}}</td>
+            <td>{{i.zmiana}}</td>
+            <td>{{i.KTM}}</td>
+            <td>{{i.Opis}}</td>
+            <td>{{i.Forma}}</td>
+            <td>{{i.ile_plan}}</td>
+            <td>{{i.ile_realiz}}</td>
+            <td>{{i.brak}}</td>
+            <td>{{i.powod}}</td>      
+            {% if i.powod == None and i.brak > 0 %}
+                <td>
+                <label for="powody">Wybierz powod:</label>
+                <select name={{i.KTM}} id="powody">
+                  <option selected></option>                  
+                  <option value="Forma za poźno zawieszona">Forma za poźno zawieszona</option>
+                  <option value="Forma niedostarczona">Forma niedostarczona</option>
+                  <option value="Brak formy">Brak formy</option>
+                  <option value="Błąd planisty">Błąd planisty</option></td>
+                </select> 
+            {% elif i.brak == 0 %}               
+            {% else %}
+                {% set my_string = my_string ~ i.id ~ string %}
+                <td><a href="/delete/{{my_string}}" method="POST"> Usuń powód</a></td>
+            {% endif %}
+                
+  {% endfor %}
+</tr>
+
+        </tbody>
+
+</table>
+          <a href='/add_submit'><button>Submit</button></a>
+</form>
+  </ol>
+  

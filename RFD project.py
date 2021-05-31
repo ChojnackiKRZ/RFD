@@ -18,8 +18,8 @@ app = Flask (__name__)
 
 Username="""type your username here"""
 Password="""type your password here"""
-Server='DESKTOP-H0M7PK9\SQLEXPRESS'
-Database='AdventureWorks2014'
+Server='type your server name here'
+Database='type your db here'
 Driver='SQL Server' 
 
 conn = pyodbc.connect(f'DRIVER={Driver};\
